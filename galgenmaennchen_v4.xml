@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="galgenmaennchen_v4" default="all">
+  
+  
+  <property file="galgenmaennchen_v4.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.war"/>
+    <include name="*.zip"/>
+    <include name="*.ane"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module Galgenmaennchen v4 -->
+  
+  <dirname property="module.galgenmaennchen_v4.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.galgenmaennchen_v4" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.galgenmaennchen_v4" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.galgenmaennchen_v4" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.galgenmaennchen_v4" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="galgenmaennchen_v4.output.dir" value="${module.galgenmaennchen_v4.basedir}/out/production/Galgenmaennchen v4"/>
+  <property name="galgenmaennchen_v4.testoutput.dir" value="${module.galgenmaennchen_v4.basedir}/out/test/Galgenmaennchen v4"/>
+  
+  <path id="galgenmaennchen_v4.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="galgenmaennchen_v4.module.production.classpath">
+    <path refid="${module.jdk.classpath.galgenmaennchen_v4}"/>
+  </path>
+  
+  <path id="galgenmaennchen_v4.runtime.production.module.classpath">
+    <pathelement location="${galgenmaennchen_v4.output.dir}"/>
+  </path>
+  
+  <path id="galgenmaennchen_v4.module.classpath">
+    <path refid="${module.jdk.classpath.galgenmaennchen_v4}"/>
+    <pathelement location="${galgenmaennchen_v4.output.dir}"/>
+  </path>
+  
+  <path id="galgenmaennchen_v4.runtime.module.classpath">
+    <pathelement location="${galgenmaennchen_v4.testoutput.dir}"/>
+    <pathelement location="${galgenmaennchen_v4.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.galgenmaennchen_v4">
+    <patternset refid="ignored.files"/>
+    <exclude name="out/**"/>
+    <exclude name="out/artifacts/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/com/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/com/company/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/com/intellij/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/com/intellij/uiDesigner/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/com/intellij/uiDesigner/core/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/src/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/src/META-INF/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/.idea/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/.idea/artifacts/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/.idea/inspectionProfiles/**"/>
+    <exclude name="out/artifacts/Galgenmaennchen_v4_jar/Galgenmaennchen v4/META-INF/**"/>
+    <exclude name="out/production/**"/>
+    <exclude name="out/production/Galgenmaennchen v3/**"/>
+    <exclude name="out/production/Galgenmaennchen v3/com/**"/>
+    <exclude name="out/production/Galgenmaennchen v3/com/company/**"/>
+    <exclude name="out/production/Galgenmaennchen v3/com/intellij/**"/>
+    <exclude name="out/production/Galgenmaennchen v3/com/intellij/uiDesigner/**"/>
+    <exclude name="out/production/Galgenmaennchen v3/com/intellij/uiDesigner/core/**"/>
+    <exclude name="out/production/Galgenmaennchen v3/META-INF/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/com/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/com/company/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/com/intellij/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/com/intellij/uiDesigner/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/com/intellij/uiDesigner/core/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/src/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/src/META-INF/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/.idea/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/.idea/artifacts/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/.idea/inspectionProfiles/**"/>
+    <exclude name="out/production/Galgenmaennchen v4/META-INF/**"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.galgenmaennchen_v4">
+    <patternset refid="excluded.from.module.galgenmaennchen_v4"/>
+  </patternset>
+  
+  <path id="galgenmaennchen_v4.module.sourcepath">
+    <dirset dir="${module.galgenmaennchen_v4.basedir}/../../JavaStuff">
+      <include name="Galgenmaennchen v4/src"/>
+      <include name="Galgenmaennchen v4"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.galgenmaennchen_v4" depends="compile.module.galgenmaennchen_v4.production,compile.module.galgenmaennchen_v4.tests" description="Compile module Galgenmaennchen v4"/>
+  
+  <target name="compile.module.galgenmaennchen_v4.production" depends="register.custom.compilers" description="Compile module Galgenmaennchen v4; production classes">
+    <mkdir dir="${galgenmaennchen_v4.output.dir}"/>
+    <javac2 destdir="${galgenmaennchen_v4.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.galgenmaennchen_v4}/javac">
+      <compilerarg line="${compiler.args.galgenmaennchen_v4}"/>
+      <bootclasspath refid="galgenmaennchen_v4.module.bootclasspath"/>
+      <classpath refid="galgenmaennchen_v4.module.production.classpath"/>
+      <src refid="galgenmaennchen_v4.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.galgenmaennchen_v4"/>
+    </javac2>
+    
+    <copy todir="${galgenmaennchen_v4.output.dir}">
+      <fileset dir="${module.galgenmaennchen_v4.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.galgenmaennchen_v4.basedir}">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.galgenmaennchen_v4.tests" depends="register.custom.compilers,compile.module.galgenmaennchen_v4.production" description="compile module Galgenmaennchen v4; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.galgenmaennchen_v4" description="cleanup module">
+    <delete dir="${galgenmaennchen_v4.output.dir}"/>
+    <delete dir="${galgenmaennchen_v4.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.galgenmaennchen_v4" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.galgenmaennchen_v4" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.galgenmaennchen_v4:jar" value="${basedir}/out/artifacts/Galgenmaennchen_v4_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.Galgenmaennchen v4.jar" value="${artifacts.temp.dir}/Galgenmaennchen v4.jar"/>
+  </target>
+  
+  <target name="artifact.galgenmaennchen_v4:jar" depends="init.artifacts, compile.module.galgenmaennchen_v4" description="Build &#39;Galgenmaennchen v4:jar&#39; artifact">
+    <property name="artifact.temp.output.galgenmaennchen_v4:jar" value="${artifacts.temp.dir}/Galgenmaennchen_v4_jar"/>
+    <mkdir dir="${artifact.temp.output.galgenmaennchen_v4:jar}"/>
+    <jar destfile="${temp.jar.path.Galgenmaennchen v4.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${galgenmaennchen_v4.output.dir}"/>
+      <zipfileset file="${basedir}/09.gif"/>
+      <zipfileset file="${basedir}/13.gif"/>
+      <zipfileset file="${basedir}/17.gif"/>
+      <zipfileset file="${basedir}/07.gif"/>
+      <zipfileset file="${basedir}/02.gif"/>
+      <zipfileset file="${basedir}/04.gif"/>
+      <zipfileset file="${basedir}/12.gif"/>
+      <zipfileset file="${basedir}/16.gif"/>
+      <zipfileset file="${basedir}/14.gif"/>
+      <zipfileset file="${basedir}/01.gif"/>
+      <zipfileset file="${basedir}/11.gif"/>
+      <zipfileset file="${basedir}/08.gif"/>
+      <zipfileset file="${basedir}/06.gif"/>
+      <zipfileset file="${basedir}/00.gif"/>
+      <zipfileset file="${basedir}/03.gif"/>
+      <zipfileset file="${basedir}/15.gif"/>
+      <zipfileset file="${basedir}/10.gif"/>
+      <zipfileset file="${basedir}/05.gif"/>
+    </jar>
+    <copy file="${temp.jar.path.Galgenmaennchen v4.jar}" tofile="${artifact.temp.output.galgenmaennchen_v4:jar}/Galgenmaennchen v4.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.galgenmaennchen_v4:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.galgenmaennchen_v4:jar}"/>
+    <copy todir="${artifact.output.galgenmaennchen_v4:jar}">
+      <fileset dir="${artifact.temp.output.galgenmaennchen_v4:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
