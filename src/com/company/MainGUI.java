@@ -101,6 +101,58 @@ public class MainGUI {          //Deklaration der Buttons und aller Variablen
         frame.setVisible(true);
     }
 
+    private void animation1 ()
+    {
+        Thread t1 = new Thread(() ->
+        {
+            for (byte b = 1; b < 25; b++)
+            {
+                bild.setIcon(new ImageIcon(Class.class.getResource("/animation1/frame" + b + ".gif")));
+                try {
+                    Thread.sleep(120);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t1.start();
+    }
+
+    private void animation2 ()
+    {
+        Thread t1 = new Thread(() ->
+        {
+            for (byte b = 1; b < 7; b++)
+            {
+                bild.setIcon(new ImageIcon(Class.class.getResource("/animation2/frame" + b + ".gif")));
+                try {
+                    Thread.sleep(120);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t1.start();
+    }
+
+    private void animation3 ()
+    {
+        Thread t1 = new Thread(() ->
+        {
+            for (byte b = 1; b < 18; b++)
+            {
+                bild.setIcon(new ImageIcon(Class.class.getResource("/animation3/frame" + b + ".gif")));
+                try {
+                    Thread.sleep(120);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            bild.setIcon(new ImageIcon(Class.class.getResource("/animation3/frame18.gif")));
+        });
+        t1.start();
+    }
+
     private void buttonClicked (char buchstabe, int zahl)
     {
         if(start && !buttonPressed[zahl]) { //Die Funktion darf nur ausgeführt werden wenn start wahr ist und der Knopf noch nicht gedrückt wurde, da sonst ein Fehler im Programm auftritt
@@ -132,7 +184,20 @@ public class MainGUI {          //Deklaration der Buttons und aller Variablen
                     String bildAusgabe;
                     if(zaehler < 10) { // wenn kleiner ist als 10
                         bildAusgabe = "/img/" + "0" + zaehler + ".gif"; // Setze die Variable für die Bildausgabe zusammen
-                    } else bildAusgabe = "/img/" + zaehler + ".gif"; // Wenn größer als 9 lasse die 0 weg
+                    } else if (zaehler == 11)
+                    {
+                        animation1();
+                        bildAusgabe = "/animation1/frame2.gif";
+                    } else if (zaehler == 13)
+                    {
+                        animation2();
+                        bildAusgabe = "/animation2/frame2.gif";
+                    } else if (zaehler == 16)
+                    {
+                        animation3();
+                        bildAusgabe = "/animation3/frame2.gif";
+                    }
+                    else bildAusgabe = "/img/" + zaehler + ".gif"; // Wenn größer als 9 lasse die 0 weg
                     bild.setIcon(new ImageIcon(Class.class.getResource(bildAusgabe))); //Gebe das Bild aus
                     if (versuche <= 0) { // wenn Versuche kleiner oder gleich 0 sind
                         JOptionPane.showMessageDialog(null, "Du hast keine Versuche mehr übrig, du wurdest erhängt."); //Gebe eine Meldung aus, das man verloren hat
